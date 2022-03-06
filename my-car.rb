@@ -1,16 +1,10 @@
 class MyCar
-  def self.fuel_economy(fuel, range)
-    puts "Fuel Economy Calculation in l/100km"
-    puts "Fuel used: #{fuel}, Range driven: #{range}"
-    puts "#{100.0 * fuel / range} litres per 100km"
-  end
-
   attr_accessor :color
-  attr_reader :year, :model
+  attr_reader :model, :year
 
   def initialize(m, c, y)
     @model = m
-    @color = c
+    self.color = c
     @year = y
     @speed = 0
   end
@@ -45,6 +39,12 @@ class MyCar
 
   def to_s
     "This is a #{self.color} #{self.year} #{self.model}"
+  end
+
+  def self.fuel_economy(fuel, range)
+    puts "Fuel Economy Calculation in l/100km"
+    puts "Fuel used: #{fuel}, Range driven: #{range}"
+    puts "#{100.0 * fuel / range} litres per 100km"
   end
 end
 
