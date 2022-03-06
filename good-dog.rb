@@ -17,21 +17,26 @@ class GoodDog
   end
 
   def speak
-    "#{name} says arf!" #now no longer need the @name, this is the getter method
+    "#{name} says arf!"
   end
 
-  # New method that can change several states at once,
-  # not yet a proper setter. It won't work to remove the
-  # @ from each variable, we must use self.xyz
+  # Proper setter method
   def change_info(n, h, w)
-    @name = n
-    @height = h
-    @weight = w
+    self.name = n
+    self.height = h
+    self.weight = w
   end
 
+  # optional to use self on getter variables
   def info
-    "#{name} weighs #{weight} and is #{height} tall."
+    "#{self.name} weighs #{self.weight} and is #{self.height} tall."
   end
+
+  # May also call any instance method with self.
+  def some_method
+    self.info
+  end
+  
 end
   
 sparky = GoodDog.new('Sparky', '12 inches', '10 lbs')
