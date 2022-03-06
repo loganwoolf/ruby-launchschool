@@ -36,11 +36,12 @@ class GoodDog
   def some_method
     self.info
   end
-  
+
+  # Class method, can be called on class GoodDog itself
+  def self.what_am_i
+    "I'm a GoodDog class!"
+  end
 end
   
-sparky = GoodDog.new('Sparky', '12 inches', '10 lbs')
-puts sparky.info      # => Sparky weighs 10 lbs and is 12 inches tall.
-
-sparky.change_info('Spartacus', '24 inches', '45 lbs')
-puts sparky.info      # => Spartacus weighs 45 lbs and is 24 inches tall.
+# Calling the class method
+puts GoodDog.what_am_i
