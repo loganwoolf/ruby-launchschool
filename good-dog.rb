@@ -6,23 +6,25 @@ module Speak # this is a mixin
 end
 
 class GoodDog
-  def initialize(name) # called every time like constructor
-    # puts "This object was initialized!"
-    @name = name # instance variable with @, other one is local and is destroyed
+  def initialize(name)
+    @name = name
   end
-  include Speak
+
+  def speak
+    "#{@name} says arf!"
+  end
 end
 
 class HumanBeing
   include Speak
 end
 
-sparky = GoodDog.new("Sparky") # "Sparky" becomes name, which then becomes @name
-sparky.speak("Arf!")
+sparky = GoodDog.new("Sparky")
+puts sparky.speak
 fido = GoodDog.new("Fido")
+puts fido.speak
 
 bob = HumanBeing.new
-bob.speak("Ugg!")
 
 # puts "---GoodDog ancestors---"
 # puts GoodDog.ancestors
