@@ -6,14 +6,22 @@ module Speak # this is a mixin
 end
 
 class GoodDog
-  # This one line of code gives us six getter/setter instance methods: name, name=, height, height=, weight, weight=. It also gives us three instance variables: @name, @height, @weight.
+  @@number_of_dogs = 0
+
   attr_accessor :name, :height, :weight
 
-  # state constructor method
+  # state constructor method, called every time an
+  # object is instantiated via #new method
   def initialize(n, h, w)
     @name = n
     @height = h
     @weight = w
+
+    @@number_of_dogs += 1
+  end
+
+  def self.total_number_of_dogs
+    @@number_of_dogs
   end
 
   def speak
@@ -43,5 +51,10 @@ class GoodDog
   end
 end
   
-# Calling the class method
-puts GoodDog.what_am_i
+
+puts GoodDog.total_number_of_dogs
+
+dog1 = GoodDog.new("Rex", 24, 35)
+dog2 = GoodDog.new("Phteven", 7, 6)
+
+puts GoodDog.total_number_of_dogs
