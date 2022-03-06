@@ -1,38 +1,33 @@
-class GoodDog
-  attr_accessor :name, :height, :weight
-
-  def initialize(n, h, w)
-    self.name   = n
-    self.height = h
-    self.weight = w
-  end
-
-  def change_info(n, h, w)
-    self.name   = n
-    self.height = h
-    self.weight = w
-  end
-
-  def info
-    "#{self.name} weighs #{self.weight} and is #{self.height} tall."
-  end
-
-  def what_is_self
-    self
+class Animal
+  def speak
+    "#{self.name} speaks: Hello!" # Self refers to the instance
   end
 end
 
-sparky = GoodDog.new('Sparky', '12 inches', '10 lbs')
-p sparky.what_is_self # references the calling object
+class GoodDog < Animal # Inherits methods from superclass Animal using '<'
+  attr_accessor :name
 
+  def initialize(n)
+    self.name = n
+  end
 
-class MyAwesomeClass
-  puts self
-  def self.this_is_a_class_method # creates a class method
-
+  # Overrides the speak method in the super class
+  def speak
+    "#{self.name} says 'Arf!'"
   end
 end
 
-# Self inside instance method refers to instance object
-# Self inside class refers to class itself, can be used
-#   to define class methods
+class Cat < Animal
+  attr_accessor :name
+
+  def initialize(n)
+    self.name = n
+  end
+
+  # Speak method is inherited from superclass Animal
+end
+
+sparky = GoodDog.new("Rex")
+paws = Cat.new("Goop")
+puts sparky.speak           # => Hello!
+puts paws.speak             # => Hello!
