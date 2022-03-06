@@ -13,21 +13,32 @@ class GoodDog
   def speak
     "#{@name} says arf!"
   end
-end
+  
+  # instance var can't be accessed directly, needs a
+  # method to return it. This is a getter.
+  def name   # Renamed from get_name. Convention.
+    @name
+  end
 
+  # This is a setter. Notice the equals sign
+  def name=(n)  # Renamed from set_name. Convention
+    @name = n  # Setters always return the argument
+    # any value here will be ignored
+  end
+end
+  
 class HumanBeing
   include Speak
 end
 
 sparky = GoodDog.new("Sparky")
+puts sparky.name
 puts sparky.speak
-fido = GoodDog.new("Fido")
-puts fido.speak
 
-bob = HumanBeing.new
+# This doesn't work because of the = on the setter method
+# sparky.set_name("Rex") 
+# notice that this is invoked with an equals
+sparky.name = "Rex" 
 
-# puts "---GoodDog ancestors---"
-# puts GoodDog.ancestors
-# puts ''
-# puts "---HumanBeing ancestors---"
-# puts HumanBeing.ancestors
+puts sparky.name
+puts sparky.speak
