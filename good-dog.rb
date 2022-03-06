@@ -6,24 +6,15 @@ module Speak # this is a mixin
 end
 
 class GoodDog
+  attr_accessor :name #, :height, :weight # replaced the getter and setter methods
+  # attr_reader for just setting a getter
+  # attr_writer for just setting a setter
   def initialize(name)
     @name = name
   end
 
   def speak
-    "#{@name} says arf!"
-  end
-  
-  # instance var can't be accessed directly, needs a
-  # method to return it. This is a getter.
-  def name   # Renamed from get_name. Convention.
-    @name
-  end
-
-  # This is a setter. Notice the equals sign
-  def name=(n)  # Renamed from set_name. Convention
-    @name = n  # Setters always return the argument
-    # any value here will be ignored
+    "#{name} says arf!" #now no longer need the @name, this is the getter method
   end
 end
   
