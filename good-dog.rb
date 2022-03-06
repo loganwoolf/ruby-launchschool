@@ -1,14 +1,17 @@
 class Animal
-  def speak
-    "Hello!"
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
   end
 end
 
 class GoodDog < Animal
-  def speak
-    super + " from GoodDog class"
+  def initialize(color)
+    # forwards arguments to super constructor if none specified
+    super
+    @color = color
   end
 end
 
-sparky = GoodDog.new
-puts sparky.speak # => "Hello! from GoodDog class"
+bruno = GoodDog.new("brown")        # => #<GoodDog:0x007fb40b1e6718 @color="brown", @name="brown">
