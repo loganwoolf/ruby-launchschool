@@ -6,30 +6,36 @@ module Speak # this is a mixin
 end
 
 class GoodDog
-  attr_accessor :name #, :height, :weight # replaced the getter and setter methods
-  # attr_reader for just setting a getter
-  # attr_writer for just setting a setter
-  def initialize(name)
-    @name = name
+  # This one line of code gives us six getter/setter instance methods: name, name=, height, height=, weight, weight=. It also gives us three instance variables: @name, @height, @weight.
+  attr_accessor :name, :height, :weight
+
+  # state constructor method
+  def initialize(n, h, w)
+    @name = n
+    @height = h
+    @weight = w
   end
 
   def speak
     "#{name} says arf!" #now no longer need the @name, this is the getter method
   end
+
+  # New method that can change several states at once,
+  # not yet a proper setter. It won't work to remove the
+  # @ from each variable, we must use self.xyz
+  def change_info(n, h, w)
+    @name = n
+    @height = h
+    @weight = w
+  end
+
+  def info
+    "#{name} weighs #{weight} and is #{height} tall."
+  end
 end
   
-class HumanBeing
-  include Speak
-end
+sparky = GoodDog.new('Sparky', '12 inches', '10 lbs')
+puts sparky.info      # => Sparky weighs 10 lbs and is 12 inches tall.
 
-sparky = GoodDog.new("Sparky")
-puts sparky.name
-puts sparky.speak
-
-# This doesn't work because of the = on the setter method
-# sparky.set_name("Rex") 
-# notice that this is invoked with an equals
-sparky.name = "Rex" 
-
-puts sparky.name
-puts sparky.speak
+sparky.change_info('Spartacus', '24 inches', '45 lbs')
+puts sparky.info      # => Spartacus weighs 45 lbs and is 24 inches tall.
