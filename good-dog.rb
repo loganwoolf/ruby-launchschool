@@ -1,23 +1,38 @@
 class GoodDog
-  DOG_YEARS = 7
+  attr_accessor :name, :height, :weight
 
-  attr_accessor :name, :age
-
-  def initialize(n, a)
-    self.name = n
-    self.age  = a * DOG_YEARS
+  def initialize(n, h, w)
+    self.name   = n
+    self.height = h
+    self.weight = w
   end
 
-  def to_s
-    # to_s is also called on every string interpolation #{}
-    "this dog's name is #{name} and its age is #{age} dog-years."
+  def change_info(n, h, w)
+    self.name   = n
+    self.height = h
+    self.weight = w
+  end
+
+  def info
+    "#{self.name} weighs #{self.weight} and is #{self.height} tall."
+  end
+
+  def what_is_self
+    self
   end
 end
 
-sparky = GoodDog.new("Sparky", 4)
-# #to_s belongs to every class
-# puts automatically calls to_s on its argument
-puts sparky             # => 28
+sparky = GoodDog.new('Sparky', '12 inches', '10 lbs')
+p sparky.what_is_self # references the calling object
 
-# p automatically calls inspect on its argument
-p sparky
+
+class MyAwesomeClass
+  puts self
+  def self.this_is_a_class_method # creates a class method
+
+  end
+end
+
+# Self inside instance method refers to instance object
+# Self inside class refers to class itself, can be used
+#   to define class methods
