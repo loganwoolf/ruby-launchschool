@@ -1,30 +1,25 @@
-# Namespacing, grouping related classes under a module
+class GoodDog
+  DOG_YEARS = 7
 
-module Mammal
-  class Dog
-    def speak(sound)
-      p "#{sound}"
-    end
+  attr_accessor :name, :age
+  def initialize(n, a)
+    self.name = n
+    self.age = a
   end
-
-  class Cat
-    def say_name(name)
-      p "#{name}"
-    end
+  
+  def public_disclosure
+    # human_years is implicitly called by 'self'
+    "#{self.name} in human years is #{human_years}"
   end
-
-  def self.describe
-    "Mammals are pretty much normal animals"
+  
+  private # only accessible from other methods in the class
+  # protected # as above, but also accessible by any instance that inherits it ???
+  
+  def human_years
+    age * DOG_YEARS
   end
 end
 
-# Call classes using '::'
-# rex = Dog.new # Err: uninitialized constant
-buster = Mammal::Dog.new
-buster.speak("Arf!")
-mittens = Mammal::Cat.new
-mittens.say_name("Mittens")
-
-# Call module methods
-puts Mammal.describe
-puts Mammal::describe # less preferred way
+sparky = GoodDog.new("Sparky", 4)
+# p sparky.human_years # does not work, it's private
+p sparky.public_disclosure
