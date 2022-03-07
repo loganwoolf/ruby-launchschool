@@ -1,25 +1,34 @@
-class GoodDog
-  DOG_YEARS = 7
+# Generally, don't override methods. to_s might be ok to
+# override if you just want a different string to return
 
-  attr_accessor :name, :age
-  def initialize(n, a)
-    self.name = n
-    self.age = a
-  end
-  
-  def public_disclosure
-    # human_years is implicitly called by 'self'
-    "#{self.name} in human years is #{human_years}"
-  end
-  
-  private # only accessible from other methods in the class
-  # protected # as above, but also accessible by any instance that inherits it ???
-  
-  def human_years
-    age * DOG_YEARS
+class Parent
+  def say_hi
+    p "Hi from Parent."
   end
 end
 
-sparky = GoodDog.new("Sparky", 4)
-# p sparky.human_years # does not work, it's private
-p sparky.public_disclosure
+# puts Parent.superclass       # => Object
+
+class Child < Parent
+  def say_hi
+    p "Hi from Child."
+  end
+
+  # def send
+  #   p "send from Child..."
+  # end
+
+  # def instance_of?
+  #   p "I am a fake instance"
+  # end
+end
+
+child = Child.new
+child.say_hi         # => "Hi from Child."
+
+son = Child.new
+son.send 'say_hi'
+
+p son.instance_of? Child
+p son.instance_of? Parent
+
