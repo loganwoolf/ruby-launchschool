@@ -1,35 +1,34 @@
-# Extract common methods to a superclass
-# Exceptions can be put in modules and mixed in
-
-# "is-a" relationship, class inheritance (only one super)
-# "has-a" relationship, interface inheritance (mixin)
-
-module Swimmable # convention is to use -able on verb modules 
-  def swim
-    puts "I'm swimming!"
+module Walkable
+  def walk
+    "I'm walking."
   end
 end
 
-class Animal; end
-
-class Fish < Animal
-  include Swimmable # mixing in module
+module Swimmable
+  def swim
+    "I'm swimming."
+  end
 end
 
-class Mammal < Animal
+module Climbable
+  def climb
+    "I'm climbing."
+  end
 end
 
-class Cat < Mammal
+class Animal
+  include Walkable # below, consulted fourth
+
+  def speak
+    "I'm an animal, and I speak!"
+  end
 end
 
-class Dog < Mammal
-  include Swimmable # mixing in module
+# puts Animal.ancestors # check lookup order for methods
+
+class GoodDog < Animal # parent consulted third, then modules in reverse order
+  include Swimmable # module consulted second
+  include Climbable # module consulted first
 end
 
-sparky = Dog.new
-neemo  = Fish.new
-paws   = Cat.new
-
-sparky.swim
-neemo.swim
-# paws.swim # gives error
+puts GoodDog.ancestors
