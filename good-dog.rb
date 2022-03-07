@@ -1,34 +1,30 @@
-module Walkable
-  def walk
-    "I'm walking."
+# Namespacing, grouping related classes under a module
+
+module Mammal
+  class Dog
+    def speak(sound)
+      p "#{sound}"
+    end
+  end
+
+  class Cat
+    def say_name(name)
+      p "#{name}"
+    end
+  end
+
+  def self.describe
+    "Mammals are pretty much normal animals"
   end
 end
 
-module Swimmable
-  def swim
-    "I'm swimming."
-  end
-end
+# Call classes using '::'
+# rex = Dog.new # Err: uninitialized constant
+buster = Mammal::Dog.new
+buster.speak("Arf!")
+mittens = Mammal::Cat.new
+mittens.say_name("Mittens")
 
-module Climbable
-  def climb
-    "I'm climbing."
-  end
-end
-
-class Animal
-  include Walkable # below, consulted fourth
-
-  def speak
-    "I'm an animal, and I speak!"
-  end
-end
-
-# puts Animal.ancestors # check lookup order for methods
-
-class GoodDog < Animal # parent consulted third, then modules in reverse order
-  include Swimmable # module consulted second
-  include Climbable # module consulted first
-end
-
-puts GoodDog.ancestors
+# Call module methods
+puts Mammal.describe
+puts Mammal::describe # less preferred way
